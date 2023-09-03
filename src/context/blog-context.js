@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import createContext from './createContext'
+import apiServer from '../api/server'
 
 const initialState = [
   {
@@ -16,15 +17,17 @@ const initialState = [
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'add_blogpost':
-      return [
-        ...state,
-        {
-          id: Date.now(),
-          title: action.payload.title,
-          content: action.payload.content,
-        },
-      ]
+    case 'get_blogposts':
+      return action.payload
+    // case 'add_blogpost':
+    //   return [
+    //     ...state,
+    //     {
+    //       id: action.payload.id,
+    //       title: action.payload.title,
+    //       content: action.payload.content,
+    //     },
+    //   ]
     case 'delete_blogpost':
       return state.filter((blogPost) => blogPost.id !== action.payload)
     case 'edit_blogpost':
@@ -39,28 +42,33 @@ const reducer = (state, action) => {
   }
 }
 
-const addBlogPost = (dispatch) => (title, content, cb) => {
-  dispatch({ type: 'add_blogpost', payload: { title, content } })
+const getBlogPosts = (dispatch) => async () => {
+  const response = await apiServer().getPosts()
+  dispatch({ type: 'get_blogposts', payload: response })
+}
+const addBlogPost = (dispatch) => async (title, content, cb) => {
+  const response = await apiServer().createPost({ title, content })
+  // dispatch({ type: 'add_blogpost', payload: response })
   cb?.()
 }
-const deleteBlogPost = (dispatch) => (id) =>
+const deleteBlogPost = (dispatch) => async (id) => {
+  const response = await apiServer().deletePost(id)
   dispatch({ type: 'delete_blogpost', payload: id })
+}
 
-const editBlogPost = (dispatch) => (id, title, content, cb) => {
+const editBlogPost = (dispatch) => async (id, title, content, cb) => {
+  const response = await apiServer().updatePost(id, { title, content })
   dispatch({ type: 'edit_blogpost', payload: { id, title, content } })
   cb?.()
 }
 
 const actions = {
+  getBlogPosts,
   addBlogPost,
   deleteBlogPost,
   editBlogPost,
 }
-export const { Context, Provider } = createContext(
-  reducer,
-  actions,
-  initialState
-)
+export const { Context, Provider } = createContext(reducer, actions, [])
 
 export const useBlogContext = () => {
   const value = useContext(Context)

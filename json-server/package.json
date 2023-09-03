@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "json-server --watch db.json -p 3010",
+    "tunnel": "ngrok http 3010 --authtoken 26ntjVcbCBpzZc9a4BnpcaLabYH_3Xh1JxKJGEYCqganuYuSn"
+  },
+  "dependencies": {
+    "json-server": "^0.17.3",
+    "ngrok": "^5.0.0-beta.2"
+  }
+}

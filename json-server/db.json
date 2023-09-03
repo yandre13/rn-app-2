@@ -1,0 +1,24 @@
+{
+  "blogposts": [
+    {
+      "id": 1,
+      "title": "My first blogpost",
+      "content": "This is my first blogpost. I hope you like it."
+    },
+    {
+      "title": "izi 1",
+      "content": "izi 1",
+      "id": 2
+    },
+    {
+      "title": "izi 2",
+      "content": "izi 2",
+      "id": 3
+    },
+    {
+      "title": "izi 3",
+      "content": "izi 3",
+      "id": 4
+    }
+  ]
+}

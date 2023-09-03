@@ -28,7 +28,10 @@ const PostForm = ({
         placeholder="Content"
         style={styles.input}
       />
-      <Button title="Edit Blog Post" onPress={onSubmitForm} />
+      <Button
+        title={`${edit ? 'Edit' : 'Enter'} Blog Post`}
+        onPress={onSubmitForm}
+      />
     </View>
   )
 }
