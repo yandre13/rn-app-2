@@ -1,5 +1,5 @@
 const apiServer = () => {
-  const url = 'https://2c64-38-25-28-3.ngrok-free.app/blogposts'
+  const url = 'https://9d89-38-25-28-3.ngrok-free.app/blogposts'
   const getPosts = async () => {
     const response = await fetch(url)
     const posts = await response.json()

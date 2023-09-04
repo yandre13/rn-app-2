@@ -1,10 +1,9 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text } from 'react-native'
 import React, { useMemo } from 'react'
-import { Feather } from '@expo/vector-icons'
 import { useBlogContext } from '../context/blog-context'
 
-const ShowScreen = ({ navigation }) => {
-  const id = navigation.getParam('id')
+const ShowScreen = ({ route }) => {
+  const id = route.params.id
   const { state } = useBlogContext()
 
   const blogPost = useMemo(() => {
@@ -19,20 +18,6 @@ const ShowScreen = ({ navigation }) => {
       <Text>{blogPost.title}</Text>
     </View>
   )
-}
-
-ShowScreen.navigationOptions = ({ navigation }) => {
-  return {
-    headerRight: () => (
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Edit', { id: navigation.getParam('id') })
-        }}
-      >
-        <Feather name="edit" size={24} />
-      </TouchableOpacity>
-    ),
-  }
 }
 
 export default ShowScreen

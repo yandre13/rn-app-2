@@ -16,7 +16,7 @@ const IndexScreen = ({ navigation }) => {
   useEffect(() => {
     getBlogPosts()
 
-    const listener = navigation.addListener('didFocus', () => {
+    const listener = navigation.addListener('focus', () => {
       getBlogPosts()
     })
 
@@ -73,15 +73,5 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 })
-
-IndexScreen.navigationOptions = ({ navigation }) => {
-  return {
-    headerRight: () => (
-      <TouchableOpacity onPress={() => navigation.navigate('Create')}>
-        <Feather name="plus" size={30} />
-      </TouchableOpacity>
-    ),
-  }
-}
 
 export default IndexScreen

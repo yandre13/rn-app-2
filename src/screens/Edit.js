@@ -2,8 +2,8 @@ import React, { useMemo } from 'react'
 import { useBlogContext } from '../context/blog-context'
 import PostForm from '../components/PostForm'
 
-const EditScreen = ({ navigation }) => {
-  const id = navigation.getParam('id')
+const EditScreen = ({ navigation, route }) => {
+  const id = route.params.id
   const { state, editBlogPost } = useBlogContext()
 
   const blogPost = useMemo(() => {
